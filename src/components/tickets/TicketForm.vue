@@ -62,6 +62,7 @@ async function create(event: any) {
     <textarea
       required
       id="description"
+      rows="6"
       class="form-control mb-3"
       v-model="form.description"
     ></textarea>

@@ -5,10 +5,10 @@ import TicketList from "../components/tickets/TicketList.vue";
 
 <template>
   <main class="row">
-    <div class="col-4">
+    <div class="col-12 col-md-4">
       <TicketForm></TicketForm>
     </div>
-    <div class="col-8">
+    <div class="col-12 col-md-8">
       <TicketList></TicketList>
     </div>
   </main>
