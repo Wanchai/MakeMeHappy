@@ -1,6 +1,14 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  type RouteLocationNormalized,
+} from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginFormView from "../components/login/LoginForm.vue";
+import { supabase } from "@/supabase";
+import type { User } from "@/models/user.model";
+
+const user = (await supabase.auth.getSession()).data.session?.user as User;
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +32,13 @@ const router = createRouter({
       component: () => import("../views/AboutView.vue"),
     },
   ],
+});
+
+router.beforeEach(async (to: RouteLocationNormalized) => {
+  if (user?.aud !== "authenticated" && to.name !== "login") {
+    // redirect the user to the login page
+    return { name: "login" };
+  }
 });
 
 export default router;

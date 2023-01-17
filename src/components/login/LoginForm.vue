@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from "@/router";
 import { ref } from "vue";
 import { supabase } from "../../supabase";
 
@@ -15,7 +16,7 @@ const handleLogin = async () => {
     });
     if (error) throw error;
 
-    // TODO: Redirect
+    router.push({ name: "home" });
   } catch (error) {
     if (error instanceof Error) {
       alert(error.message);
@@ -31,13 +32,13 @@ const handleLogin = async () => {
     <div class="col-6 form-widget">
       <div>
         <input
-          class="form-control"
+          class="form-control mb-2"
           type="email"
           placeholder="Your email"
           v-model="email"
         />
         <input
-          class="form-control"
+          class="form-control mb-2"
           type="password"
           placeholder="***"
           v-model="password"
@@ -46,7 +47,7 @@ const handleLogin = async () => {
       <div>
         <input
           type="submit"
-          class="btn"
+          class="btn btn-primary"
           :value="loading ? 'Loading' : 'Log me in!'"
           :disabled="loading"
         />
